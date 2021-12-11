@@ -23,7 +23,8 @@ function partTwo(vec<int> $numbers) {
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
   $contents = await File\open_read_only("../input/01.txt")->readAllAsync();
-  $numbers = Vec\map(Str\split($contents, "\n"), $line ==> Str\to_int(Str\trim($line)));
+  $numbers =
+    Vec\map(Str\split($contents, "\n"), $line ==> Str\to_int(Str\trim($line)));
   echo "Part one: ", partOne($numbers), "\n";
   echo "Part two: ", partTwo($numbers), "\n";
 }

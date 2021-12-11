@@ -1,0 +1,3 @@
+error_php_lambdas = true
+disable_xhp_children_declarations = false
+enable_strict_string_concat_interp=true
