@@ -1,4 +1,4 @@
-use HH\Lib\{C, Str, Vec, File};
+use namespace HH\Lib\{C, File, Str, Vec};
 
 function partOne(vec<int> $numbers) {
   $count = 0;
