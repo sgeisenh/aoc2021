@@ -1,10 +1,4 @@
-<?hh //strict
-
-$lines = explode("\n", file_get_contents("../input/01.txt"));
-$numbers = array_map($line ==> (int)trim($line), $lines);
-
-$contents = await File\open_read_only("../input/01.txt");
-$numbers = Vec\map(Str\split($contents, "\n"), $line ==> Str\to_int(Str\trim($line)));
+use HH\Lib\{C, Str, Vec, File};
 
 function partOne(vec<int> $numbers) {
   $count = 0;
@@ -26,7 +20,10 @@ function partTwo(vec<int> $numbers) {
   return $count;
 }
 
-echo "Part one: ", partOne($numbers), "\n";
-echo "Part two: ", partTwo($numbers), "\n";
-
-?>
+<<__EntryPoint>>
+async function run(): Awaitable<void> {
+  $contents = await File\open_read_only("../input/01.txt")->readAllAsync();
+  $numbers = Vec\map(Str\split($contents, "\n"), $line ==> Str\to_int(Str\trim($line)));
+  echo "Part one: ", partOne($numbers), "\n";
+  echo "Part two: ", partTwo($numbers), "\n";
+}
