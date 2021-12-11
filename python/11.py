@@ -10,7 +10,7 @@ while True:
   for row in grid:
     for col in range(len(row)):
       row[col] += 1
-  flash_coords = set()
+  step_flashes = 0
   while any(any(col >= 10 for col in row) for row in grid):
     for r in range(len(grid)):
       for c in range(len(grid[r])):
@@ -22,10 +22,10 @@ while True:
               grid[nr][nc] += 1
           grid[r][c] = 0
           total_flashes += 1
-          flash_coords.add((r, c))
+          step_flashes += 1
   steps += 1
   if steps == 100:
     print('Part one:', total_flashes)
-  if len(flash_coords) == 100:
+  if step_flashes == 100:
     print('Part two:', steps)
     break
