@@ -18,14 +18,16 @@ def minDist(grid):
 
   while Q:
     dist, (r, c) = heapq.heappop(Q)
-    if (r, c) in D:
+    if (r, c) in D and dist > D[(r, c)]:
       continue
-    D[(r, c)] = dist
     for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
       nr = r + dr
       nc = c + dc
       if 0 <= nr < len(grid) and 0 <= nc < len(grid[0]):
-        heapq.heappush(Q, (dist + grid[nr][nc], (nr, nc)))
+        cost = dist + grid[nr][nc]
+        if (nr, nc) not in D or cost < D[(nr, nc)]:
+          D[(nr, nc)] = cost
+          heapq.heappush(Q, (cost, (nr, nc)))
 
   return D[(len(grid) - 1, len(grid[0]) - 1)]
 
