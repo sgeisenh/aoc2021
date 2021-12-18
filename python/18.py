@@ -55,7 +55,7 @@ def explode(pair):
   newPair, _, _ = explodeHelper(pair, 0)
   return newPair, pair != newPair
 
-def splitElem(elem):
+def split(elem):
   if isinstance(elem, int):
     if elem >= 10:
       left = elem // 2
@@ -66,34 +66,19 @@ def splitElem(elem):
       return elem, False
   else:
     left, right = elem
-    left, didSplitL = splitElem(left)
+    left, didSplitL = split(left)
     if didSplitL:
       return (left, right), True
-    right, didSplitR = splitElem(right)
+    right, didSplitR = split(right)
     return (left, right), didSplitR
 
-def split(pair):
-  left, right = pair
-  left, didSplitL = splitElem(left)
-  if didSplitL:
-    return (left, right), True
-  right, didSplitR = splitElem(right)
-  return (left, right), didSplitR
-
 def reducePair(pair):
-  while True:
-    exploded_once = False
-    while True:
-      pair, did_explode = explode(pair)
-      if did_explode:
-        exploded_once = True
-      else:
-        break
-    pair, did_split = split(pair)
-    if did_split:
-      return reducePair(pair)
-    if not exploded_once:
-      break
+  pair, did_explode = explode(pair)
+  if did_explode:
+    return reducePair(pair)
+  pair, did_split = split(pair)
+  if did_split:
+    return reducePair(pair)
   return pair
 
 def addPairs(left, right):
