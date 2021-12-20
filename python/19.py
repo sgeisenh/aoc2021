@@ -37,18 +37,19 @@ def generateRelative(scanner):
   return result
 
 def applyFacing(facing, scanner):
-  if facing == 'forward':
-    return scanner
-  elif facing == 'back':
-    return [(-x, y, -z) for x, y, z in scanner]
-  elif facing == 'up':
-    return [(x, -z, y) for x, y, z in scanner]
-  elif facing == 'down':
-    return [(x, z, -y) for x, y, z in scanner]
-  elif facing == 'left':
-    return [(z, y, -x) for x, y, z in scanner]
-  elif facing == 'right':
-    return [(-z, y, x) for x, y, z in scanner]
+  match facing:
+    case 'forward':
+      return scanner
+    case 'back':
+      return [(-x, y, -z) for x, y, z in scanner]
+    case 'up':
+      return [(x, -z, y) for x, y, z in scanner]
+    case 'down':
+      return [(x, z, -y) for x, y, z in scanner]
+    case 'left':
+      return [(z, y, -x) for x, y, z in scanner]
+    case 'right':
+      return [(-z, y, x) for x, y, z in scanner]
   assert(False)
 
 def applyRotation(rotation, scanner):
