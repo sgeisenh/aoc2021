@@ -1,15 +1,8 @@
 import fileinput
 import copy
 
-lines = [line.strip() for line in fileinput.input()]
+grid = [[c for c in line.strip()] for line in fileinput.input()]
 
-grid = [[c for c in line] for line in lines]
-for row in grid:
-  rowstr = ''
-  for col in row:
-    rowstr += col
-  print(rowstr)
-print()
 wasMovement = True
 step = 0
 while wasMovement:
@@ -33,11 +26,5 @@ while wasMovement:
           wasMovement = True
   grid = newGrid
   step += 1
-  for row in grid:
-    rowstr = ''
-    for col in row:
-      rowstr += col
-    print(rowstr)
-  print()
 
-print(step)
+print('Part one:', step)
